@@ -4,7 +4,7 @@
 
 O projeto foi desenvolvido como parte da trilha Docker/AWS no Programa de Bolsas da Compass UOL – Abril 2025 | AWS & DevSecOps.
 
-Este repositório documenta a criação de uma infraestrutura completa e escalável na AWS para hospedar uma aplicação WordPress, utilizando containers Docker em instâncias EC2 privadas, banco de dados gerenciado via RDS MySQL, armazenamento compartilhado com EFS, distribuição de tráfego com Load Balancer, escalabilidade automática com Auto Scaling Group, monitoramento com CloudWatch, automação de provisionamento via script *User Data* e automação completa via template CloudFormation.
+Este repositório documenta a criação de uma infraestrutura completa e escalável na AWS para hospedar uma aplicação WordPress, utilizando containers Docker em instâncias EC2 privadas, banco de dados gerenciado via RDS MySQL, armazenamento compartilhado com EFS, distribuição de tráfego com Load Balancer, escalabilidade automática com Auto Scaling Group, monitoramento com CloudWatch e automação de provisionamento via script *User Data*.
 
 ## ⚙️ Arquitetura do Projeto
 
@@ -26,7 +26,6 @@ Além dos recursos representados na imagem, o projeto também implementa:
 
 - Monitoramento com **Amazon CloudWatch**
 - Regras personalizadas de **Auto Scaling**
-- Automação da infraestrutura com **CloudFormation**
 
 > Esses serviços não estão ilustrados no diagrama, mas fazem parte da infraestrutura documentada e aplicada na prática.
 
@@ -58,9 +57,6 @@ Além dos recursos representados na imagem, o projeto também implementa:
 </a>
 <a href="https://docs.aws.amazon.com/cloudwatch/" target="_blank">
   <img src="https://img.shields.io/badge/CloudWatch-FF4F8B?style=for-the-badge&logo=amazonaws&logoColor=white" />
-</a>
-<a href="https://docs.aws.amazon.com/cloudformation/" target="_blank">
-  <img src="https://img.shields.io/badge/CloudFormation-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white" />
 </a>
 <a href="https://wordpress.org/" target="_blank">
   <img src="https://img.shields.io/badge/WordPress-21759B?style=for-the-badge&logo=wordpress&logoColor=white" />
@@ -96,7 +92,7 @@ Configuração da VPC, subnets públicas e privadas, gateway de internet, NAT ga
 **[PASSO A PASSO COMPLETO DA ETAPA 01](etapa-01-criar-rede.md)**
 
 ### ➤ Etapa 02 – Grupos de Segurança  
-Criação dos grupos de segurança para EC2, RDS e EFS com regras de entrada e saída conforme necessidade da aplicação.
+Criação dos grupos de segurança para EC2, RDS, EFS e Load Balancer com regras de entrada e saída conforme necessidade da aplicação.
 
 **[PASSO A PASSO COMPLETO DA ETAPA 02](etapa-02-grupos-seguranca.md)**
 
@@ -116,12 +112,12 @@ Configuração do Launch Template com EC2 em subnet privada, instalação via Us
 **[PASSO A PASSO COMPLETO DA ETAPA 05](etapa-05-launch-template-ec2.md)**
 
 ### ➤ Etapa 06 – Load Balancer  
-Criação de um Application Load Balancer com target group associado às instâncias EC2. Health checks configurados no caminho raiz (`/`).
+Criação de um Application Load Balancer com Target Group associado às instâncias EC2. Health checks configurados no caminho raiz (`/`).
 
 **[PASSO A PASSO COMPLETO DA ETAPA 06](etapa-06-load-balancer.md)**
 
 ### ➤ Etapa 07 – Auto Scaling Group  
-Criação de ASG com mínimo de 2 e máximo de 4 instâncias, usando o Launch Template configurado na etapa anterior. 
+Criação do Auto Scaling Group com Launch Template, associação ao Target Group e definição das regras de escalabilidade. 
 
 **[PASSO A PASSO COMPLETO DA ETAPA 07](etapa-07-auto-scaling.md)**
 
@@ -134,11 +130,6 @@ Criação de alarme de CPU e dashboard para acompanhamento da EC2 e do Auto Scal
 Verificação completa do funcionamento do WordPress (via navegador), conexão com o RDS, persistência via EFS e balanceamento de carga.
 
 **[PASSO A PASSO COMPLETO DA ETAPA 09](etapa-09-testes.md)**
-
-### ➤ Etapa 10 – Automação com CloudFormation  
-Criação de um template completo do CloudFormation para automatizar toda a infraestrutura criada manualmente nas etapas anteriores.
-
-**[PASSO A PASSO COMPLETO DA ETAPA 10](etapa-10-cloudformation.md)**
 
 ## 👩‍💻 Desenvolvido por:
 
