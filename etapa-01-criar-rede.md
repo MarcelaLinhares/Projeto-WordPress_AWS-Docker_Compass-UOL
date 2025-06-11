@@ -63,7 +63,7 @@ Nesta etapa foi criada a infraestrutura de rede do projeto WordPress na AWS, com
 
 > ✅ Verifique se os **tipos das subnets** estão corretos: as públicas têm acesso à internet (via IGW), e as privadas não.
 
-![Subnets criadas](img/06-etapa1-1.2-SUbNETS.png)
+![Subnets criadas](img/06-etapa1-1.2-SUBNETS.png)
 
 ---
 
