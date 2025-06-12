@@ -14,7 +14,7 @@ Nesta etapa, será criado um **Auto Scaling Group (ASG)** que irá garantir a **
 
 - **Nome:** `wordpress-asg`
 - **Launch Template:** selecione o que foi criado (ex: `wordpress-template`)
-- **Versão:** `Default (padrão)`
+- **Versão:** `Latest (2)`
 - Clique em **Avançar**
 
 ![Print da criação do ASG](img/52-etapa7-ASG.png)
@@ -30,9 +30,8 @@ Nesta etapa, será criado um **Auto Scaling Group (ASG)** que irá garantir a **
 
 ### 4. Associar ao Load Balancer
 
-- Selecione: **Associar a um Load Balancer existente**
-- Tipo: `Classic Load Balancer`
-- Selecione o **Load Balancer** criado na etapa 6 - `wordpress-lb`
+- Tipo: `Application Load Balancer`
+- Selecione o **Target Group** criado na etapa 6 - `wordpress-tg`
 - Clique em **Avançar**
 
 ![Print da associação ao Load Balancer ao ASG](img/54-etapa7-ASG.png)
@@ -73,5 +72,4 @@ Nesta etapa, será criado um **Auto Scaling Group (ASG)** que irá garantir a **
 ### ✅ Observações finais
 
 - O Auto Scaling Group utilizará o **Launch Template** com User Data que instala e inicia o WordPress automaticamente.
-- As **políticas de escalabilidade (Scaling Policies)** serão criadas na **Etapa 08 – CloudWatch**.
 - O ASG manterá **duas instâncias sempre ativas** e poderá escalar até **quatro instâncias**, conforme definido nesta etapa.

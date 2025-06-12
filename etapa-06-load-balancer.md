@@ -1,6 +1,6 @@
-# Etapa 06 – Criar o Load Balancer (Classic LB)
+# Etapa 06 – Criar o Load Balancer (Application LB)
 
-Nesta etapa, será criado um **Classic Load Balancer** que distribuirá o tráfego entre as instâncias EC2. Ele garantirá:
+Nesta etapa, será criado um **Application Load Balancer** que distribuirá o tráfego entre as instâncias EC2. Ele garantirá:
 - Alta disponibilidade entre múltiplas zonas de disponibilidade
 - Monitoramento da integridade das instâncias
 - Redirecionamento automático em caso de falha
@@ -15,37 +15,34 @@ Nesta etapa, será criado um **Classic Load Balancer** que distribuirá o tráfe
 
 ### 2. Escolher tipo de Load Balancer
 
-1. Clique para **expandir** a seção do **Classic Load Balancer – geração anterior**
-2. Selecione **Classic Load Balancer**
-3. Clique em **Criar**
+1. Selecione **Application Load Balancer**
+2. Clique em **Criar**
 
 ![Print da seleção do tipo Classic Load Balancer](img/46-etapa6-LB.png)
 
 ### 3. Configuração do Load Balancer
 
-1. **Nome do balanceador de carga:** `wordpress-lb`
+1. **Nome do balanceador de carga:** `wordpress-alb`
 2. **Esquema:** Selecione **Voltado para a Internet**
-3. **VPC:** Selecione a **VPC wordpress-vpc** criada na Etapa 01
 
 ![Print da tela de nome e esquema Classic Load Balancer](img/47-etapa6-LB.png)
 
 ### 4. Selecionar zonas de disponibilidade
 
-1. Marque as zonas **us-east-1a** e **us-east-1b**
-2. Em cada zona, selecione a **sub-rede pública** correspondente:
+1. **VPC:** Selecione a **VPC wordpress-vpc** criada na Etapa 01
+2. Marque as zonas **us-east-1a** e **us-east-1b**
+3. Em cada zona, selecione a **sub-rede pública** correspondente:
    - `wordpress-subnet-public1-us-east-1a`
    - `wordpress-subnet-public2-us-east-1b`
-3. Grupos de segurança: `lb-sg`
 
 ![Print da seleção das zonas e sub-redes públicas Classic Load Balancer](img/48-etapa6-LB.png)
 
-### 5. Configurar verificação de integridade (Health checks)
+### 5. Configurar roteamento
 
-1. Caminho de ping: `/index.php`
-2. Tempo limite de resposta: `5` segundos
-3. Intervalo de verificação: `15` segundos
-4. Tentativas com falha: `2`
-5. Tentativas bem-sucedidas: `3`
+1. Grupos de segurança: `lb-sg`
+2. Protocolo: **HTTP**
+3. Porta: **80**
+4. Ação Padrão (Target Group): `wordpress-tg`
 
 ![Print da tela de verificação de integridade Classic Load Balancer](img/49-etapa6-LB.png)
 
@@ -59,20 +56,15 @@ Nesta etapa, será criado um **Classic Load Balancer** que distribuirá o tráfe
 
 ---
 
-### ✅ Verificações obrigatórias
+## > Criar o Target Group
 
-- Verifique se o Load Balancer foi criado com sucesso
-- Verifique se as **zonas de disponibilidade**, **VPC** e **sub-redes públicas** estão corretas
-- Confirme que o **caminho de verificação de integridade** foi definido como `/index.php`
+1. Na tela de criação do Application Load Balancer, em **Listeners e roteamento**
 
-![Print da confirmação de criação Classic Load Balancer](img/51-etapa6-LB.png)
+2. Clique em **Criar grupo de destino**
 
----
-
-### 📌 Observações finais:
-
-- O **Classic Load Balancer (CLB)** não utiliza **Target Group**, diferente do Application Load Balancer (ALB). Portanto, não é necessário criar Target Group nesta etapa.
-
-- O **estado do Load Balancer ficará como “—”** até que uma instância EC2 esteja registrada e saudável, o que ocorrerá após a criação do Auto Scaling Group, na próxima etapa.
-
-- O caminho de verificação de integridade (Health Check) foi configurado para `/index.php`, pois é o ponto de entrada principal da aplicação WordPress. Se preferir, é possível usar `/` também.
+![Print da criação TG](img/51-etapa6-TG.png)
+![Print da criação TG](img/52-etapa6-TG.png)
+![Print da criação TG](img/53-etapa6-TG.png)
+![Print da criação TG](img/54-etapa6-TG.png)
+![Print da criação TG](img/55-etapa6-TG.png)
+![Print da criação TG](img/56-etapa6-TG.png)

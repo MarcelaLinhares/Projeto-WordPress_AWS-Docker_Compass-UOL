@@ -102,12 +102,13 @@ Configuração do Launch Template com EC2 em subnet privada, instalação via Us
 **[PASSO A PASSO COMPLETO DA ETAPA 05](etapa-05-launch-template-ec2.md)**
 
 ### ➤ Etapa 06 – Load Balancer  
-Criação de um Classic Load Balancer com verificações de integridade configuradas no caminho (`/index.php`) e associação direta às instâncias EC2.
+Criação de um Application Load Balancer voltado para a internet, configurado para escutar requisições na porta HTTP (80).
+Foi criado um Target Group do tipo instance com verificações de integridade configuradas no caminho (`/`). Esse grupo de destino foi associado ao Auto Scaling Group, garantindo o balanceamento automático de carga entre as instâncias EC2.
 
 **[PASSO A PASSO COMPLETO DA ETAPA 06](etapa-06-load-balancer.md)**
 
 ### ➤ Etapa 07 – Auto Scaling Group  
-Criação do Auto Scaling Group com Launch Template, e definição das regras de escalabilidade. 
+Criação do Auto Scaling Group com Launch Template. 
 
 **[PASSO A PASSO COMPLETO DA ETAPA 07](etapa-07-auto-scaling.md)**
 

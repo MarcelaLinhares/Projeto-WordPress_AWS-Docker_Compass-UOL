@@ -46,37 +46,39 @@ Nesta etapa, será criado um **Launch Template** para inicializar instâncias EC
 ```bash
 #!/bin/bash
 
-# Variáveis (substitua pelos valores reais antes da criação)
+# Variáveis
 EFS_FILE_SYSTEM_ID="<id_efs>"
 DB_HOST="<endpoint_rds>"
 DB_NAME="<nome_bd>"
 DB_USER="<usuario_bd>"
 DB_PASSWORD="<senha_bd>"
-DOCKER_COMPOSE_VERSION="v2.34.0"
 PROJECT_DIR="/home/ec2-user/wordpress"
 EFS_MOUNT_DIR="/mnt/efs"
 
 # Atualizações e instalação do Docker
 yum update -y
 yum install -y docker
-systemctl start docker
-systemctl enable docker
-usermod -aG docker ec2-user
 
-# Instala Docker Compose
-curl -SL https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+# Inicia o serviço docker
+service docker start
+usermod -a -G docker ec2-user
+
+# Instala Docker Compose (versão atual recomendada)
+curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
-# Instala e monta o EFS
+# Instala EFS utils e monta o sistema
 yum install -y amazon-efs-utils
 mkdir -p ${EFS_MOUNT_DIR}
 mount -t efs ${EFS_FILE_SYSTEM_ID}:/ ${EFS_MOUNT_DIR}
 echo "${EFS_FILE_SYSTEM_ID}:/ ${EFS_MOUNT_DIR} efs defaults,_netdev 0 0" >> /etc/fstab
 
-# Permissões para WordPress
-chown -R 33:33 ${EFS_MOUNT_DIR}
+# Permissões para o EFS
+mkdir -p ${EFS_MOUNT_DIR}/html
+chown -R 33:33 ${EFS_MOUNT_DIR}/html
+chmod -R 775 ${EFS_MOUNT_DIR}/html
 
-# Prepara o projeto
+# Prepara o projeto WordPress
 mkdir -p ${PROJECT_DIR}
 cd ${PROJECT_DIR}
 
@@ -95,10 +97,10 @@ services:
     ports:
       - 80:80
     volumes:
-      - ${EFS_MOUNT_DIR}:/var/www/html
+      - ${EFS_MOUNT_DIR}/html:/var/www/html
 EOL
 
-# Inicializa WordPress
+# Inicia o container
 docker-compose up -d
 ```
 
@@ -114,10 +116,3 @@ docker-compose up -d
 - Verifique se os campos como **AMI**, **Security Group** e **Key Pair** estão corretos.
 
 ![Print da criação do Launch Template](img/45-etapa5-LAUNCH-TEMPLATE.png)
-
----
-
-### 📌 Observações finais
-
-- O **Amazon Linux 2023** usa `yum` como gerenciador de pacotes.
-- O comando `systemctl enable docker` garante que o serviço do Docker seja reiniciado automaticamente com a instância.
