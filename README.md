@@ -119,7 +119,7 @@ Criação de um Classic Load Balancer com verificações de integridade configur
 **[PASSO A PASSO COMPLETO DA ETAPA 06](etapa-06-load-balancer.md)**
 
 ### ➤ Etapa 07 – Auto Scaling Group  
-Criação do Auto Scaling Group com Launch Template, associação ao Target Group e definição das regras de escalabilidade. 
+Criação do Auto Scaling Group com Launch Template, e definição das regras de escalabilidade. 
 
 **[PASSO A PASSO COMPLETO DA ETAPA 07](etapa-07-auto-scaling.md)**
 
