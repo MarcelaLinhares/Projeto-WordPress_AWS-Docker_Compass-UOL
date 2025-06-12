@@ -4,7 +4,7 @@
 
 O projeto foi desenvolvido como parte da trilha Docker/AWS no Programa de Bolsas da Compass UOL – Abril 2025 | AWS & DevSecOps.
 
-Este repositório documenta a criação de uma infraestrutura completa e escalável na AWS para hospedar uma aplicação WordPress, utilizando containers Docker em instâncias EC2 privadas, banco de dados gerenciado via RDS MySQL, armazenamento compartilhado com EFS, distribuição de tráfego com Load Balancer, escalabilidade automática com Auto Scaling Group, monitoramento com CloudWatch e automação de provisionamento via script *User Data*.
+Este repositório documenta a criação de uma infraestrutura completa e escalável na AWS para hospedar uma aplicação WordPress, utilizando containers Docker em instâncias EC2 privadas, banco de dados gerenciado via RDS MySQL, armazenamento compartilhado com EFS, distribuição de tráfego com Load Balancer, escalabilidade automática com Auto Scaling Group e automação de provisionamento via script *User Data*.
 
 ## ⚙️ Arquitetura do Projeto
 
@@ -19,15 +19,6 @@ A arquitetura contempla:
 - EFS
 - Auto Scaling Group
 - Distribuição entre duas zonas de disponibilidade (AZs)
-
-### ➕ Serviços complementares presentes no projeto
-
-Além dos recursos representados na imagem, o projeto também implementa:
-
-- Monitoramento com **Amazon CloudWatch**
-- Regras personalizadas de **Auto Scaling**
-
-> Esses serviços não estão ilustrados no diagrama, mas fazem parte da infraestrutura documentada e aplicada na prática.
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -54,9 +45,6 @@ Além dos recursos representados na imagem, o projeto também implementa:
 </a>
 <a href="https://docs.aws.amazon.com/autoscaling/" target="_blank">
   <img src="https://img.shields.io/badge/Auto Scaling-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white" />
-</a>
-<a href="https://docs.aws.amazon.com/cloudwatch/" target="_blank">
-  <img src="https://img.shields.io/badge/CloudWatch-FF4F8B?style=for-the-badge&logo=amazonaws&logoColor=white" />
 </a>
 <a href="https://wordpress.org/" target="_blank">
   <img src="https://img.shields.io/badge/WordPress-21759B?style=for-the-badge&logo=wordpress&logoColor=white" />
@@ -123,15 +111,10 @@ Criação do Auto Scaling Group com Launch Template, e definição das regras de
 
 **[PASSO A PASSO COMPLETO DA ETAPA 07](etapa-07-auto-scaling.md)**
 
-### ➤ Etapa 08 – Monitoramento com CloudWatch  
-Criação de alarme de CPU e dashboard para acompanhamento da EC2 e do Auto Scaling.
-
-**[PASSO A PASSO COMPLETO DA ETAPA 08](etapa-08-cloudwatch.md)**
-
-### ➤ Etapa 09 – Testes da Infraestrutura  
+### ➤ Etapa 08 – Testes da Infraestrutura  
 Verificação completa do funcionamento do WordPress (via navegador), conexão com o RDS, persistência via EFS e balanceamento de carga.
 
-**[PASSO A PASSO COMPLETO DA ETAPA 09](etapa-09-testes.md)**
+**[PASSO A PASSO COMPLETO DA ETAPA 08](etapa-08-testes.md)**
 
 ## 👩‍💻 Desenvolvido por:
 
