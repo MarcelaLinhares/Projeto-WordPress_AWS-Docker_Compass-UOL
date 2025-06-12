@@ -114,7 +114,7 @@ Configuração do Launch Template com EC2 em subnet privada, instalação via Us
 **[PASSO A PASSO COMPLETO DA ETAPA 05](etapa-05-launch-template-ec2.md)**
 
 ### ➤ Etapa 06 – Load Balancer  
-Criação de um Application Load Balancer com Target Group associado às instâncias EC2. Health checks configurados no caminho raiz (`/`).
+Criação de um Classic Load Balancer com verificações de integridade configuradas no caminho (`/index.php`) e associação direta às instâncias EC2.
 
 **[PASSO A PASSO COMPLETO DA ETAPA 06](etapa-06-load-balancer.md)**
 
